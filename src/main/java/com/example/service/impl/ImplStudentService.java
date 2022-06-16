@@ -34,7 +34,6 @@ public class ImplStudentService implements StudentService {
 	@Autowired
 	StudentReponsitory studentReponsitory;
 
-//	public static final int COLUMN_INDEX_ID = 0;
 	public static final int COLUMN_INDEX_SCHOOL = 1;
 	public static final int COLUMN_INDEX_DISTRICT = 2;
 	public static final int COLUMN_INDEX_STUDENTID = 3;
@@ -63,17 +62,9 @@ public class ImplStudentService implements StudentService {
 	public static final int COLUMN_INDEX_PRIORTIZED = 20;
 	public static final int COLUMN_INDEX_TOTAL_RECRUITMENT_SCORE = 21;
 	public static final int COLUMN_INDEX_NOTE = 22;
-	
-	
-	
-
-//	public static final int COLUMN_INDEX_POINT = 21;
-//	public static final int COLUMN_INDEX_NOTE = 22;
-
 
 	@Override
 	public void writeFile(String document)throws IOException, ParseException {
-//		final String excelFilePath = "C:/demo/sample.xlsx";
 		final String excelFilePath = document;
 		
 		final List<Student> lStudents = readExcelFile(excelFilePath);
@@ -86,15 +77,15 @@ public class ImplStudentService implements StudentService {
 	public static List<Student> readExcelFile(String excelFilePath) throws IOException, ParseException {
 		List<Student> lStudents = new ArrayList<>();
 
-		// Get file
+		
 		InputStream inputStream = new FileInputStream(new File(excelFilePath));
 
-		// Get workbook
+		
 		Workbook workbook = getWorkbook(inputStream, excelFilePath);
 
 		Sheet sheet = workbook.getSheetAt(0);
 
-		// Get all rows
+		
 		Iterator<Row> iterator = sheet.iterator();
 		while (iterator.hasNext()) {
 			Row nextRow = (Row) iterator.next();
@@ -104,13 +95,13 @@ public class ImplStudentService implements StudentService {
 
 				Student student = new Student();
 				while (cellIterator.hasNext()) {
-					// Read cell
+					
 					Cell cell = (Cell) cellIterator.next();
 					Object cellValue = getCellValue(cell);
 					if (cellValue == null || cellValue.toString().isEmpty()) {
 						continue;
 					}
-					// Set value for book object
+					
 					int columnIndex = cell.getColumnIndex();
 					switch (columnIndex) {
 						case COLUMN_INDEX_SCHOOL:
